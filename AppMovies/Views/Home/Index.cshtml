@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 text-center">
+                <img src="@item.Picture" alt="@item.Picture" class="img-responsive">
+                <h4>@item.Title</h4>
+                <p>@item.Description</p>
+            </div>
+        }
+    </div>
