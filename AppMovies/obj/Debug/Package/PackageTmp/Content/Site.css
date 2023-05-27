@@ -1,6 +1,61 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #474747;
+    color: #fff;
+}
+
+/* Extras */
+/* Set width on the form input elements to 100% */
+input[type="text"].search-input {
+    width: 100%;
+    max-width: none;
+}
+
+.row {
+    margin-top: 20px;
+}
+
+
+ .dark-button {
+     background-color: #474747;
+     color: #fff;
+     border: 1px solid #474747;
+ }
+
+.dark-button:hover {
+    background-color: #363636;
+    color: #fff;
+    border: 1px solid #363636;
+}
+
+.navbar-brand.selected {
+    /* Add your selected link styles here */
+    color: #fff;
+    /* Example styles, modify them according to your design */
+}
+
+
+/* Star Styles */
+.rating {
+    display: inline-block;
+}
+
+.star {
+    width: 27px;
+    height: 29px;
+    background-image: url('../Images/Star.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.star.yellow {
+    background-image: url('../Images/YellowStar.png');
+    
+}
+
+.star.half {
+    background-image: url('../Images/HalfStar.png');
 }
 
 /* Set padding to keep content from hitting the edges */

@@ -4,12 +4,38 @@
 
 
 <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-4 text-center">
-                <img src="@item.Picture" alt="@item.Picture" class="img-responsive">
-                <h4>@item.Title</h4>
-                <p>@item.Description</p>
-            </div>
-        }
+    <div class="col-md-12">
+        <div class="input-group">
+            <input style="background-color: #222222; color: #fff; border: 1px solid #222222;" type="text" class="form-control search-input" placeholder="Enter the title to search a movie">
+                <span class="input-group-btn" style="margin-left: 10px">
+                    <button type="submit" class="btn btn-primary dark-button" style="background-color: #222222">Search</button>
+                </span>
+        </div>
     </div>
+</div>
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 text-center">
+            <img src="@item.Picture" alt="@item.Picture" class="img-responsive">
+            <h4>@item.Title</h4>
+            <div class="rating">
+                @for (int i = 0; i < 3; i++)
+                {
+                    <span class="star yellow"></span>
+                }
+                @if (3 % 1 != 0)
+                {
+                    <span class="star yellow half"></span>
+                }
+                @for (int i = 3 + 1; i <= 5; i++)
+                {
+                    <span class="star"></span>
+                }
+            </div>
+            <p>@item.Description</p>
+        </div>
+    }
+</div>
