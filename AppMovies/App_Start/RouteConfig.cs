@@ -18,6 +18,12 @@ namespace AppMovies
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            
+            routes.MapRoute(
+                name: "",
+                url: "Directors",
+                defaults: new { controller = "Directors", action = "Directors" }
+            );
         }
     }
 }

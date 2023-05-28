@@ -47,6 +47,13 @@ input[type="text"].search-input {
     /* Example styles, modify them according to your design */
 }
 
+.badge-container {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    margin-top: 0.5em;
+}
+
 
 /* Star Styles */
 .rating {
