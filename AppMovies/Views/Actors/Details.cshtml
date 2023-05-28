@@ -1,21 +1,20 @@
-@model AppMovies.Models.DirectorWithMovies
+@model AppMovies.Models.ActorWithMovies
 
 @{
-    ViewBag.Title = "Director details";
+    ViewBag.Title = "Actor details";
 }
 
 <div class="row">
     <div class="col-md-4">
 
-        <img src="@Model.Director.Photo" alt="Director Photo"/>
+        <img src="@Model.Actor.Photo" alt="Director Photo"/>
 
     </div>
     <div class="col-md-8">
-        <h3>@Model.Director.FirstName @Model.Director.LastName</h3>
-        <span class="badge badge-secondary">@Model.Director.Age years</span>
-        <span class="badge badge-secondary">@Model.Director.NumberOfMovies movies</span>
-        <span class="badge badge-secondary">Director</span>
-        <p style="margin-top: 1em">@Model.Director.Description</p>
+        <h3>@Model.Actor.FirstName @Model.Actor.LastName</h3>
+        <span class="badge badge-secondary">@Model.Actor.NumberOfMovies movies</span>
+        <span class="badge badge-secondary">Actor</span>
+        <p style="margin-top: 1em">@Model.Actor.Description</p>
         
     </div>
 </div>
@@ -30,7 +29,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model.ExtraItems)
+            @foreach (var item in Model.Movies)
             {
                 <tr>
                     <td><img src="@item.Picture" alt="@item.Title" class="img-thumbnail" style="max-height: 8em;" /></td>
@@ -61,5 +60,3 @@
             }
             </tbody>
         </table>
-
-
