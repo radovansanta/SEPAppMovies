@@ -1,0 +1,139 @@
+@model AppMovies.Models.MovieWithDetails
+
+@{
+    ViewBag.Title = "title";
+}
+
+<div class="row">
+    <div class="col-md-4">
+
+        <img src="@Model.Movie.Picture" alt="Movie Photo" style="max-height: 32em;"/>
+
+    </div>
+    <div class="col-md-8">
+        <h3>@Model.Movie.Title</h3>
+        <span class="badge badge-secondary" style="margin-bottom: 2em">@Model.Movie.Year</span>
+        <div class="rating" style="width: 12em">
+            @for (int i = 0; i < @Model.Movie.OverallRating; i++)
+            {
+                <span class="star yellow"></span>
+            }
+            @if (@Model.Movie.OverallRating % 1 != 0)
+            {
+                <span class="star yellow half"></span>
+            }
+            @for (int i = @Model.Movie.OverallRating + 1; i <= 5; i++)
+            {
+                <span class="star"></span>
+            }
+        </div>
+        <p style="margin-top: 1em">@Model.Movie.Description</p>
+        
+    </div>
+</div>
+
+
+<!-- Directors -->
+<h3>Directors</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Director</th>
+        <th>Info</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Directors)
+    {
+        <tr>
+            <td><img src="@item.Photo" alt="@item.FirstName @item.LastName" style="max-height: 8em;" /></td>
+            <td>
+                <div>
+                    <h5>@item.FirstName @item.LastName</h5>
+                    <span class="badge badge-secondary">@item.Age years</span>
+                </div>
+            </td>
+            <td><p>@item.Description</p></td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+<!-- Actors -->
+<h3>Actors</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Actor</th>
+        <th>Info</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Actors)
+    {
+        <tr>
+            <td><img src="@item.Photo" alt="@item.FullName" style="max-height: 8em;" /></td>
+            <td>
+                <div>
+                    <h5>@item.FullName</h5>
+                    <span class="badge badge-secondary">@item.NumberOfMovies movies</span>
+                </div>
+            </td>
+            <td><p>@item.Description</p></td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+<!-- Comments -->
+<h3>Comments (@Model.Movie.RatingsCount)</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>User</th>
+        <th>Info</th>
+        <th>Rating</th>
+        <th>Comment</th>
+        <th>Posted at</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Ratings)
+    {
+        <tr>
+            <td><img src="@item.Photo" alt="@item.FullName" style="max-height: 8em; border-radius: 50%;" /></td>
+            <td>
+                <div>
+                    <h5>@item.FullName</h5>
+                    <span class="badge badge-secondary">@item.Likes Likes</span>
+                    <span class="badge badge-secondary">@item.DisLikes Dislikes</span>
+                </div>
+            </td>
+            <td>
+                <div class="rating" style="width: 12em">
+                    @for (int i = 0; i < @item.RatingValue; i++)
+                    {
+                        <span class="star yellow"></span>
+                    }
+                    @if (@item.RatingValue % 1 != 0)
+                    {
+                        <span class="star yellow half"></span>
+                    }
+                    @for (int i = @item.RatingValue + 1; i <= 5; i++)
+                    {
+                        <span class="star"></span>
+                    }
+                </div>
+            </td>
+            <td><p>@item.Comment</p></td>
+            <td><p>@item.DateTimeStamp</p></td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+

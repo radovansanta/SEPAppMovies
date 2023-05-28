@@ -38,18 +38,34 @@ namespace AppMovies.Controllers
             ViewBag.SearchTerm = searchTerm;
             return View(data);
         }
-
-        public ActionResult About()
+        
+        public async Task<ActionResult> Details(int id)
         {
-            ViewBag.Message = "Your application description page.";
-            return View();
+            // Retrieve the director from the database based on the provided ID
+            Movie movie = await _movieRepository.GetMovieByIdAsync(id);
+
+            if (movie == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Retrieve the extra items related to the director
+            List<Director> directorsForMovie = await _movieRepository.GetDirectorsByMovieIdAsync(id);
+            List<Actor> actorsForMovie = await _movieRepository.GetActorsByMovieIdAsync(id);
+            List<Rating> ratingsForMovie = await _movieRepository.GetRatingsByMovieIdAsync(id);
+
+            // Create a view model to hold both the director and extra items data
+            MovieWithDetails movieWithDetails = new MovieWithDetails
+            {
+                Movie = movie,
+                Directors = directorsForMovie,
+                Actors = actorsForMovie,
+                Ratings = ratingsForMovie
+            };
+
+            return View(movieWithDetails);
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-            return View();
-        }
         
     }
 }
