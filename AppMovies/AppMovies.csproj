@@ -127,6 +127,7 @@
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
         <Compile Include="Models\Director.cs" />
+        <Compile Include="Models\DirectorWithMovies.cs" />
         <Compile Include="Models\Item.cs" />
         <Compile Include="Models\Movie.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
@@ -161,6 +162,7 @@
         <Content Include="Scripts\jquery.validate.unobtrusive.js" />
         <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
         <Content Include="Scripts\modernizr-2.8.3.js" />
+        <Content Include="Views\Directors\Details.cshtml" />
         <Content Include="Views\Directors\Directors.cshtml" />
         <Content Include="Web.config" />
         <Content Include="Web.Debug.config">

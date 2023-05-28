@@ -1,0 +1,65 @@
+@model AppMovies.Models.DirectorWithMovies
+
+@{
+    ViewBag.Title = "title";
+}
+
+<div class="row">
+    <div class="col-md-4">
+
+        <img src="@Model.Director.Photo" alt="Director Photo"/>
+
+    </div>
+    <div class="col-md-8">
+        <h3>@Model.Director.FirstName @Model.Director.LastName</h3>
+        <span class="badge badge-secondary">@Model.Director.Age years</span>
+        <span class="badge badge-secondary">@Model.Director.NumberOfMovies movies</span>
+        <span class="badge badge-secondary">Director</span>
+        <p style="margin-top: 1em">@Model.Director.Description</p>
+        
+    </div>
+</div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Info</th>
+                <th>Rating</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.ExtraItems)
+            {
+                <tr>
+                    <td><img src="@item.Picture" alt="@item.Title" class="img-thumbnail" style="max-height: 8em;" /></td>
+                    <td>
+                        <div>
+                            <h5>@item.Title</h5>
+                            <span class="badge badge-secondary">@item.Year</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="rating" style="width: 12em">
+                            @for (int i = 0; i < @item.OverallRating; i++)
+                            {
+                                <span class="star yellow"></span>
+                            }
+                            @if (@item.OverallRating % 1 != 0)
+                            {
+                                <span class="star yellow half"></span>
+                            }
+                            @for (int i = @item.OverallRating + 1; i <= 5; i++)
+                            {
+                                <span class="star"></span>
+                            }
+                        </div>
+                    </td>
+                    <td><p>@item.Description</p></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+

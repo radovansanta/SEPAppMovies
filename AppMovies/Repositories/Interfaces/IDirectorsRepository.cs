@@ -8,5 +8,7 @@ namespace AppMovies.Repositories.Interfaces
     {
         Task<List<Director>> GetDirectorsAsync();
         Task<List<Director>> GetDirectorsBySearchAsync(string searchTerm);
+        Task<List<Movie>> GetMoviesByDirectorIdAsync(int directorId);
+        Task<Director> GetDirectorByIdAsync(int directorId);
     }
 }

@@ -33,7 +33,9 @@
     {
         <div class="col-md-2 text-center item-container" style="margin-bottom: 2em;">
             <div class="image-container">
-                <img src="@item.Photo" alt="@item.Photo" class="img-responsive">
+                <a href="@Url.Action("Details", "Directors", new { id = item.DirectorId })">
+                    <img src="@item.Photo" alt="@item.Photo" class="img-responsive image-hover">
+                </a>
             </div>
             <div style="margin-top: 1em;">
                 <h4>@item.FirstName @item.LastName</h4>
