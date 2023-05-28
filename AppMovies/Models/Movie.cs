@@ -7,5 +7,8 @@ namespace AppMovies.Models
         public int Year { get; set; }
         public string Description { get; set; }
         public string Picture { get; set; }
+        
+        public int OverallRating { get; set; }
+        public int RatingsCount { get; set; }
     }
 }

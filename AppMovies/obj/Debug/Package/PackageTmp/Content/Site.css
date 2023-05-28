@@ -23,6 +23,18 @@ input[type="text"].search-input {
      border: 1px solid #474747;
  }
 
+.image-container {
+    transition: transform 0.3s;
+}
+
+.image-container:hover {
+    transform: scale(1.02);
+}
+
+.image-hover:hover {
+    transform: scale(1.02);
+}
+
 .dark-button:hover {
     background-color: #363636;
     color: #fff;

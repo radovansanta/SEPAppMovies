@@ -5,37 +5,57 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="input-group">
-            <input style="background-color: #222222; color: #fff; border: 1px solid #222222;" type="text" class="form-control search-input" placeholder="Enter the title to search a movie">
-                <span class="input-group-btn" style="margin-left: 10px">
-                    <button type="submit" class="btn btn-primary dark-button" style="background-color: #222222">Search</button>
+        <form class="input-group" method="get" action="@Url.Action("Index")">
+            <input type="text" class="form-control search-input" name="searchTerm" placeholder="Enter the title to search a movie" style="background-color: #222222; color: #fff; border: 1px solid #222222;" value="@ViewBag.SearchTerm">
+            <span class="input-group-btn" style="margin-left: 10px;">
+                <button type="submit" class="btn btn-primary dark-button" style="background-color: #222222;">Search</button>
+            </span>
+            @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+            {
+                <span class="input-group-btn" style="margin-left: 10px;">
+                    <a href="@Url.Action("Index")" class="btn btn-primary dark-button" style="background-color: #222222;">Clear</a>
                 </span>
-        </div>
+            }
+        </form>
     </div>
 </div>
+
+@if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h4>You searched for: @ViewBag.SearchTerm</h4>
+        </div>
+    </div>
+}
 
 
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="col-md-4 text-center">
-            <img src="@item.Picture" alt="@item.Picture" class="img-responsive">
-            <h4>@item.Title</h4>
-            <div class="rating">
-                @for (int i = 0; i < 3; i++)
-                {
-                    <span class="star yellow"></span>
-                }
-                @if (3 % 1 != 0)
-                {
-                    <span class="star yellow half"></span>
-                }
-                @for (int i = 3 + 1; i <= 5; i++)
-                {
-                    <span class="star"></span>
-                }
+            <div class="image-container">
+                <img src="@item.Picture" alt="@item.Picture" class="img-responsive image-hover">
             </div>
-            <p>@item.Description</p>
-        </div>
+            <div style="margin-bottom: 1em">
+                <h4>@item.Title</h4>
+                <span class="badge badge-secondary">@item.Year</span>
+            </div>
+            <div class="rating">
+                    @for (int i = 0; i < @item.OverallRating; i++)
+                    {
+                        <span class="star yellow"></span>
+                    }
+                    @if (@item.OverallRating % 1 != 0)
+                    {
+                        <span class="star yellow half"></span>
+                    }
+                    @for (int i = @item.OverallRating + 1; i <= 5; i++)
+                    {
+                        <span class="star"></span>
+                    }
+            </div>
+                <p>@item.Description</p>
+            </div>
     }
 </div>

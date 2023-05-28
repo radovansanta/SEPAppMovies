@@ -2,49 +2,40 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AppMovies.Functions;
 using AppMovies.Models;
+using AppMovies.Repositories;
+using AppMovies.Repositories.Interfaces;
 
 namespace AppMovies.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly IMovieRepository _movieRepository;
+        public HomeController()
         {
-            var data = new List<Movie>();
-            var converter = new Base64ToImageConverter();
-
-            using (var connection = new SqlConnection("Server=tcp:sepproject.database.windows.net,1433;Initial Catalog=SepProject;Persist Security Info=False;User ID=rasapebl;Password=BCb7wcOH;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"))
+            string connectionString = "Server=tcp:sepproject.database.windows.net,1433;Initial Catalog=SepProject;Persist Security Info=False;User ID=rasapebl;Password=BCb7wcOH;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            _movieRepository = new MovieRepository(connectionString);
+        }
+        
+        public async Task<ViewResult> Index(string searchTerm)
+        {
+            // Get all movies or filtered movies based on the search term
+            List<Movie> data;
+            if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                connection.Open();
-
-                var query = "SELECT MovieID, Title, Picture, Description FROM [MoviesApp].[Movies]";
-                using (var command = new SqlCommand(query, connection))
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var imageData = (byte[])reader.GetValue(2);
-
-                        var base64Image = Convert.ToBase64String(imageData);
-                        var imageUrl = $"data:image/png;base64,{base64Image}";
-                        
-                        var item = new Movie
-                        {
-
-                            MovieId = reader.GetInt32(0),
-                            Title = reader.GetString(1),
-                            Picture = imageUrl,
-                            Description = reader.GetString(3)
-                        };
-
-                        data.Add(item);
-                    }
-                }
+                data = await _movieRepository.GetMoviesAsync();
+            }
+            else
+            {
+                data = await _movieRepository.GetMoviesBySearchAsync(searchTerm);
             }
 
+            // Pass the search term and filtered results to the view
+            ViewBag.SearchTerm = searchTerm;
             return View(data);
         }
 
