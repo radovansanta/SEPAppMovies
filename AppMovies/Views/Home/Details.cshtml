@@ -122,8 +122,19 @@
             <td>
                 <div>
                     <h5>@item.FullName</h5>
-                    <span class="badge badge-secondary">@item.Likes Likes</span>
-                    <span class="badge badge-secondary">@item.DisLikes Dislikes</span>
+                    <div>
+                        <button class="btn btn-primary dark-button" id="likeButton" onclick="handleLike()">
+                            <img src="../../Images/Like.png" alt="Like" />
+                          </button>
+                        <span id="likeCount">(@item.Likes)</span>
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-primary dark-button" id="likeButton" onclick="handleLike()">
+                            <img src="../../Images/Dislike.png" alt="Like" />
+                          </button>
+                        <span id="dislikeCount">(@item.DisLikes)</span>
+                    </div>
                 </div>
             </td>
             <td>

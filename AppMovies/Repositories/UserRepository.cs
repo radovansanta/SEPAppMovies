@@ -75,5 +75,27 @@ namespace AppMovies.Repositories
 
             return null;
         }
+
+        public async Task InsertUserAsync(string firstName, string lastName, string email, string password, byte[] profilePhoto)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                var query = "INSERT INTO [MoviesApp].[Users] (FisrtName, LastName, Email, Password, Photo) " +
+                            "VALUES (@FirstName, @LastName, @Email, @Password, @ProfilePhoto)";;
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@FirstName", firstName);
+                    command.Parameters.AddWithValue("@LastName", lastName);
+                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@Password", password);
+                    command.Parameters.AddWithValue("@ProfilePhoto", profilePhoto);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
     }
 }

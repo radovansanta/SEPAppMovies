@@ -76,6 +76,7 @@ namespace AppMovies.Controllers
                 User currentUser = await _userRepository.GetUserByIdAsync(userId);
                 if (currentUser != null)
                 {
+                    //Add functionality to GetTopListMovie by User ID (true/false) and pass it to ViewBag
                     ViewBag.CurrentUser = currentUser;
                 }
                 else

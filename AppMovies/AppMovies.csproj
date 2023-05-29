@@ -163,7 +163,9 @@
         <Content Include="fonts\glyphicons-halflings-regular.svg" />
         <Content Include="Global.asax" />
         <Content Include="Content\Site.css" />
+        <Content Include="Images\Dislike.png" />
         <Content Include="Images\HalfStar.png" />
+        <Content Include="Images\Like.png" />
         <Content Include="Images\Logo.png" />
         <Content Include="Images\Star.png" />
         <Content Include="Images\YellowStar.png" />
@@ -202,6 +204,7 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="App_Data" />
+        <Folder Include="Views\SignUp" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -7,5 +7,6 @@ namespace AppMovies.Repositories.Interfaces
     {
         Task<int> AuthenticateUser(string email, string password);
         Task<User> GetUserByIdAsync(int userId);
+        Task InsertUserAsync(string firstName, string lastName, string email, string password, byte[] profilePhoto);
     }
 }
