@@ -76,3 +76,4 @@ C:\Users\Radovan\RiderProjects\AppMovies\AppMovies\obj\Debug\AppMovies.dll
 C:\Users\Radovan\RiderProjects\AppMovies\AppMovies\obj\Debug\AppMovies.pdb
 C:\Users\Radovan\RiderProjects\AppMovies\AppMovies\bin\System.Data.SqlClient.dll
 C:\Users\Radovan\RiderProjects\AppMovies\AppMovies\bin\System.Data.SqlClient.xml
+C:\Users\Radovan\RiderProjects\AppMovies\AppMovies\bin\FormsAuthenticationExtensions.dll

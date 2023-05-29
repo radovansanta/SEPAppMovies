@@ -54,6 +54,12 @@ input[type="text"].search-input {
     margin-top: 0.5em;
 }
 
+.centered-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* Star Styles */
 .rating {

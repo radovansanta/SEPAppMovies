@@ -27,24 +27,42 @@
                 <li>@Html.ActionLink("Directors", "Directors", "Directors")</li>
                 <li>@Html.ActionLink("Actors", "Actors", "Actors")</li>
             </ul>
-            <form class="navbar-form navbar-right">
-                            <div class="form-group dark-form-group">
-                                <input style="background-color: #474747; color: #fff; border: none;" type="text" class="form-control" placeholder="E-Mail">
-                            </div>
-                            <div class="form-group dark-form-group">
-                                <input style="background-color: #474747; color: #fff; border: none;" type="password" class="form-control" placeholder="Password">
-                            </div>
-                <button type="submit" class="btn btn-primary dark-button">Log-In</button>
-                <button type="submit" class="btn btn-primary dark-button">Sign-Up</button>
-                        </form>
+            
+            @{
+                var userId = HttpRuntime.Cache.Get("UserId") as string;
+            }
+            
+            @if (string.IsNullOrEmpty(userId))
+            {
+
+                <form class="navbar-form navbar-right" action="@Url.Action("Login", "Authentication")" method="post">
+                    <div class="form-group dark-form-group">
+                        <input style="background-color: #474747; color: #fff; border: none;" type="text" class="form-control" name="username" placeholder="E-Mail">
+                    </div>
+                    <div class="form-group dark-form-group">
+                        <input style="background-color: #474747; color: #fff; border: none;" type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary dark-button">Log-In</button>
+                    <button onclick="location.href='@Url.Action("LogOut", "Authentication")'" class="btn btn-primary dark-button">Sign Up</button>
+                </form>
+            }
+            else
+            {
+                <div class="nav navbar-nav navbar-right centered-navbar" style="margin-top: 0.5em; margin-left: 1em">
+                    <span>Welcome, Radovan!</span>
+                    <button style="margin-left: 1em" onclick="location.href='@Url.Action("LogOut", "Authentication")'" class="btn btn-primary dark-button">Log Out</button>
+                </div>
+            }
+            
         </div>
+
     </div>
 </div>
 <div class="container body-content">
     @RenderBody()
     <hr/>
     <footer>
-        <p>&copy; @DateTime.Now.2023 - My ASP.NET Application</p>
+        <p>&copy; @DateTime.Now.2023 - MyTheater</p>
     </footer>
 </div>
 

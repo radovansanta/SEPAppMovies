@@ -3,22 +3,23 @@
 }
 
 
-<div class="row">
-    <div class="col-md-12">
-        <form class="input-group" method="get" action="@Url.Action("Index")">
-            <input type="text" class="form-control search-input" name="searchTerm" placeholder="Enter the title to search a movie" style="background-color: #222222; color: #fff; border: 1px solid #222222;" value="@ViewBag.SearchTerm">
-            <span class="input-group-btn" style="margin-left: 10px;">
-                <button type="submit" class="btn btn-primary dark-button" style="background-color: #222222;">Search</button>
-            </span>
-            @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
-            {
+    <div class="row">
+        <div class="col-md-12">
+            <form class="input-group" method="get" action="@Url.Action("Index")">
+                <input type="text" class="form-control search-input" name="searchTerm" placeholder="Enter the title to search a movie" style="background-color: #222222; color: #fff; border: 1px solid #222222;" value="@ViewBag.SearchTerm">
                 <span class="input-group-btn" style="margin-left: 10px;">
-                    <a href="@Url.Action("Index")" class="btn btn-primary dark-button" style="background-color: #222222;">Clear</a>
+                    <button type="submit" class="btn btn-primary dark-button" style="background-color: #222222;">Search</button>
                 </span>
-            }
-        </form>
+                @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                {
+                    <span class="input-group-btn" style="margin-left: 10px;">
+                        <a href="@Url.Action("Index")" class="btn btn-primary dark-button" style="background-color: #222222;">Clear</a>
+                    </span>
+                }
+            </form>
+        </div>
     </div>
-</div>
+
 
 @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
 {

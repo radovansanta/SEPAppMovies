@@ -35,7 +35,9 @@
     {
         <div class="col-md-4 text-center">
             <div class="image-container">
-                <img src="@item.Picture" alt="@item.Picture" class="img-responsive">
+                <a href="@Url.Action("Details", "Home", new { id = item.MovieId })">
+                    <img src="@item.Picture" alt="@item.Picture" class="img-responsive">
+                </a>
             </div>
             <div style="margin-bottom: 1em">
                 <h4>@item.Title</h4>
