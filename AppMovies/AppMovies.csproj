@@ -145,8 +145,10 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Repositories\ActorRepository.cs" />
         <Compile Include="Repositories\DirectorRepository.cs" />
+        <Compile Include="Repositories\FavoriteRepository.cs" />
         <Compile Include="Repositories\Interfaces\IActorsRepository.cs" />
         <Compile Include="Repositories\Interfaces\IDirectorsRepository.cs" />
+        <Compile Include="Repositories\Interfaces\IFavoriteRepository.cs" />
         <Compile Include="Repositories\Interfaces\IMovieRepository.cs" />
         <Compile Include="Repositories\Interfaces\IRatingRepository.cs" />
         <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
@@ -164,9 +166,11 @@
         <Content Include="Global.asax" />
         <Content Include="Content\Site.css" />
         <Content Include="Images\Dislike.png" />
+        <Content Include="Images\Favorite.png" />
         <Content Include="Images\HalfStar.png" />
         <Content Include="Images\Like.png" />
         <Content Include="Images\Logo.png" />
+        <Content Include="Images\NotFavorite.png" />
         <Content Include="Images\Star.png" />
         <Content Include="Images\YellowStar.png" />
         <Content Include="Scripts\bootstrap.js" />

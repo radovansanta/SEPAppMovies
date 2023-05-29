@@ -11,7 +11,34 @@
 
     </div>
     <div class="col-md-8">
-        <h3>@Model.Movie.Title</h3>
+        <div class="row">
+            <div class="col-md-9">
+                <h3>@Model.Movie.Title</h3>
+            </div>
+            <div class="col-md-1">
+                @{
+                    var currentUserId = HttpRuntime.Cache.Get("UserId") as string;
+                }
+                
+                        @if (!string.IsNullOrEmpty(currentUserId))
+                        {
+                            if (ViewBag.IsFavorite==1)
+                            {
+                                <button class="btn btn-primary dark-button" id="likeButton" onclick="handleLike()">
+                                    <img src="../../Images/Favorite.png" alt="Like"/>
+                                    <label>Remove from favorites</label>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary dark-button" id="likeButton" onclick="handleLike()">
+                                    <img src="../../Images/NotFavorite.png" alt="Like"/>
+                                    <label>Add to favorites</label>
+                                </button>
+                            }
+                        }
+            </div>
+        </div>
         <span class="badge badge-secondary" style="margin-bottom: 2em">@Model.Movie.Year</span>
         <div class="rating" style="width: 12em">
             @for (int i = 0; i < @Model.Movie.OverallRating; i++)
@@ -28,7 +55,7 @@
             }
         </div>
         <p style="margin-top: 1em">@Model.Movie.Description</p>
-        
+
     </div>
 </div>
 

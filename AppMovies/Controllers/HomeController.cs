@@ -17,11 +17,13 @@ namespace AppMovies.Controllers
     {
         private readonly IMovieRepository _movieRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IFavoriteRepository _favoriteRepository;
         public HomeController()
         {
             string connectionString = "Server=tcp:sepproject.database.windows.net,1433;Initial Catalog=SepProject;Persist Security Info=False;User ID=rasapebl;Password=BCb7wcOH;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             _movieRepository = new MovieRepository(connectionString);
             _userRepository = new UserRepository(connectionString);
+            _favoriteRepository = new FavoriteRepository(connectionString);
         }
         
         public async Task<ViewResult> Index(string searchTerm)
@@ -76,7 +78,8 @@ namespace AppMovies.Controllers
                 User currentUser = await _userRepository.GetUserByIdAsync(userId);
                 if (currentUser != null)
                 {
-                    //Add functionality to GetTopListMovie by User ID (true/false) and pass it to ViewBag
+                    //Add functionality to FavoriteMovie by User ID (true/false) and pass it to ViewBag
+                    ViewBag.IsFavorite = await _favoriteRepository.GetIsFavoriteByUserIdAndMovieAsync(currentUser.UserId, id);
                     ViewBag.CurrentUser = currentUser;
                 }
                 else
