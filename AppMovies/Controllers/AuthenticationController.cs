@@ -2,47 +2,44 @@ using System;
 using System.Net;
 using System.Runtime.Caching;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.Services.Description;
+using AppMovies.Repositories;
+using AppMovies.Repositories.Interfaces;
 
 namespace AppMovies.Controllers
 {
     public class AuthenticationController : Controller
     {
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        /*public ActionResult Login()
+        private readonly IUserRepository _userRepository;
+        public AuthenticationController()
         {
-            FormsAuthentication.SetAuthCookie("username", false);
-            Console.WriteLine("Authenticated");
-            return RedirectToAction("Index", "Home");
-            }
-        */
+            string connectionString = "Server=tcp:sepproject.database.windows.net,1433;Initial Catalog=SepProject;Persist Security Info=False;User ID=rasapebl;Password=BCb7wcOH;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            _userRepository = new UserRepository(connectionString);
+        }
         
-
-        public ActionResult Login(string username, string password)
+        public async Task<ActionResult> Login(string username, string password)
         {
             // Perform authentication logic here using the provided username and password
-            // Example:
-            if (username == "admin" && password == "password")
+            var userId = await _userRepository.AuthenticateUser(username,password);
+
+            if (userId!=0)
             {
                 Console.WriteLine("Authenticated");
-                FormsAuthentication.SetAuthCookie(username, false);
-                
                 var cacheKey = "UserId";
-                var yourData = username;
-                HttpRuntime.Cache.Insert("UserId", yourData);
-                
+                var yourData = userId.ToString();
+                HttpRuntime.Cache.Insert(cacheKey, yourData);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
                 return RedirectToAction("Index", "Home");
             }
             
-            // Authentication failed, redirect back to the login page or display an error message
-            return RedirectToAction("Login");
         }
         
         public ActionResult LogOut()

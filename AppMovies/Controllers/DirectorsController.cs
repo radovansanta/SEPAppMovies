@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using AppMovies.Models;
 using AppMovies.Repositories;
@@ -12,10 +13,12 @@ namespace AppMovies.Controllers
     {
         
         private readonly IDirectorsRepository _directorRepository;
+        private readonly IUserRepository _userRepository;
         public DirectorsController()
         {
             string connectionString = "Server=tcp:sepproject.database.windows.net,1433;Initial Catalog=SepProject;Persist Security Info=False;User ID=rasapebl;Password=BCb7wcOH;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             _directorRepository = new DirectorRepository(connectionString);
+            _userRepository = new UserRepository(connectionString);
         }
         public async Task<ViewResult> Directors(string searchTerm)
         {
@@ -27,6 +30,22 @@ namespace AppMovies.Controllers
             else
             {
                 data = await _directorRepository.GetDirectorsBySearchAsync(searchTerm);
+            }
+            
+            // Retrieve data from cache
+            string cachedData = HttpRuntime.Cache.Get("UserId") as string;
+            if (cachedData != null && cachedData!="0")
+            {
+                int userId = int.Parse(cachedData);
+                User currentUser = await _userRepository.GetUserByIdAsync(userId);
+                if (currentUser != null)
+                {
+                    ViewBag.CurrentUser = currentUser;
+                }
+                else
+                {
+                    // Handle the case when the user is not found in the repository
+                }
             }
 
             // Pass the search term and filtered results to the view

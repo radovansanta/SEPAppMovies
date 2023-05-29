@@ -140,13 +140,16 @@
         <Compile Include="Models\Movie.cs" />
         <Compile Include="Models\MovieWithDetails.cs" />
         <Compile Include="Models\Rating.cs" />
+        <Compile Include="Models\User.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Repositories\ActorRepository.cs" />
         <Compile Include="Repositories\DirectorRepository.cs" />
         <Compile Include="Repositories\Interfaces\IActorsRepository.cs" />
         <Compile Include="Repositories\Interfaces\IDirectorsRepository.cs" />
         <Compile Include="Repositories\Interfaces\IMovieRepository.cs" />
+        <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
         <Compile Include="Repositories\MovieRepository.cs" />
+        <Compile Include="Repositories\UserRepository.cs" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="Content\bootstrap-theme.css" />

@@ -49,7 +49,7 @@
             else
             {
                 <div class="nav navbar-nav navbar-right centered-navbar" style="margin-top: 0.5em; margin-left: 1em">
-                    <span>Welcome, Radovan!</span>
+                    <span>Welcome, @ViewBag.CurrentUser.FirstName @ViewBag.CurrentUser.LastName!</span>
                     <button style="margin-left: 1em" onclick="location.href='@Url.Action("LogOut", "Authentication")'" class="btn btn-primary dark-button">Log Out</button>
                 </div>
             }
