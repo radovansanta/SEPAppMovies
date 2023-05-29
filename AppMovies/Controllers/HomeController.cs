@@ -67,6 +67,22 @@ namespace AppMovies.Controllers
             {
                 return HttpNotFound();
             }
+            
+            // Retrieve data from cache
+            string cachedData = HttpRuntime.Cache.Get("UserId") as string;
+            if (cachedData != null && cachedData!="0")
+            {
+                int userId = int.Parse(cachedData);
+                User currentUser = await _userRepository.GetUserByIdAsync(userId);
+                if (currentUser != null)
+                {
+                    ViewBag.CurrentUser = currentUser;
+                }
+                else
+                {
+                    // Handle the case when the user is not found in the repository
+                }
+            }
 
             // Retrieve the extra items related to the director
             List<Director> directorsForMovie = await _movieRepository.GetDirectorsByMovieIdAsync(id);

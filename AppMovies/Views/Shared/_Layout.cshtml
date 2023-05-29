@@ -49,6 +49,7 @@
             else
             {
                 <div class="nav navbar-nav navbar-right centered-navbar" style="margin-top: 0.5em; margin-left: 1em">
+                    <img src="@ViewBag.CurrentUser.Photo" alt="@ViewBag.CurrentUser.FirstName" style="max-height: 2.5em; border-radius: 50%; margin-right: 1em" />
                     <span>Welcome, @ViewBag.CurrentUser.FirstName @ViewBag.CurrentUser.LastName!</span>
                     <button style="margin-left: 1em" onclick="location.href='@Url.Action("LogOut", "Authentication")'" class="btn btn-primary dark-button">Log Out</button>
                 </div>

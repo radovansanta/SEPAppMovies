@@ -128,6 +128,7 @@
         <Compile Include="Controllers\AuthenticationController.cs" />
         <Compile Include="Controllers\DirectorsController.cs" />
         <Compile Include="Controllers\HomeController.cs" />
+        <Compile Include="Controllers\ReviewController.cs" />
         <Compile Include="Functions\Base64ToImageConverter.cs" />
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
@@ -147,8 +148,10 @@
         <Compile Include="Repositories\Interfaces\IActorsRepository.cs" />
         <Compile Include="Repositories\Interfaces\IDirectorsRepository.cs" />
         <Compile Include="Repositories\Interfaces\IMovieRepository.cs" />
+        <Compile Include="Repositories\Interfaces\IRatingRepository.cs" />
         <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
         <Compile Include="Repositories\MovieRepository.cs" />
+        <Compile Include="Repositories\RatingRepository.cs" />
         <Compile Include="Repositories\UserRepository.cs" />
     </ItemGroup>
     <ItemGroup>
