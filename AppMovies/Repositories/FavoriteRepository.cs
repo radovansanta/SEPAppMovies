@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using AppMovies.Models;
@@ -78,5 +79,49 @@ namespace AppMovies.Repositories
                 }
             }
         }
+
+        public async Task<List<FavoriteWithMovie>> GetFavoritesByUserIdAsync(int userId)
+        {
+            var favorites = new List<FavoriteWithMovie>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                var query = "SELECT FavoritesID ,UserID ,MovieID ,Title ,Description ,Year ,Picture FROM [MoviesApp].[FavoritesView] WHERE UserID = @userId;";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", userId);
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var imageData = (byte[])reader.GetValue(6);
+                            var base64Image = Convert.ToBase64String(imageData);
+                            var imageUrl = $"data:image/png;base64,{base64Image}";
+
+                            var item = new FavoriteWithMovie()
+                            {
+                                FavoritesId = reader.GetInt32(0),
+                                UserId = reader.GetInt32(1),
+                                MovieId = reader.GetInt32(2),
+                                Title = reader.GetString(3),
+                                Description = reader.GetString(4),
+                                Year = reader.GetInt32(5),
+                                Picture = imageUrl
+                            };
+
+                            favorites.Add(item);
+                        }
+                    }
+                }
+            }
+
+            return favorites;
+        }
+        
+        
+
+
     }
 }

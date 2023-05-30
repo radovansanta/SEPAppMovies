@@ -1,0 +1,124 @@
+@model AppMovies.Models.UserWithDetails
+
+@{
+    ViewBag.Title = "title";
+}
+
+<!-- USER INFORMATION -->
+<div class="row">
+    <div class="col-md-3">
+        <img src="@Model.User.Photo" alt="User Photo" style="max-height: 16em; border-radius: 50%;"/>
+    </div>
+    <div class="col-md-9">
+        <h3>@Model.User.FirstName @Model.User.LastName</h3>
+        <span class="badge badge-secondary">@Model.User.EMail</span>
+        <span class="badge badge-secondary">User</span>
+    </div>
+    <div>
+        <button style="background-color: #222222; margin-left: 1em;margin-top: 1em;" class="btn btn-primary dark-button">Change password</button>
+    </div>
+</div>
+
+
+<!-- MY FAVORITES MOVIES -->
+<h3>My favorites movies</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Movie</th>
+        <th>Info</th>
+        <th>Description</th>
+        <th>Favorite</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Favorites)
+    {
+        <tr>
+            <td><img src="@item.Picture" alt="@item.Title" class="img-thumbnail" style="max-height: 8em;" /></td>
+            <td>
+                <div>
+                    <h5>@item.Title</h5>
+                    <span class="badge badge-secondary">@item.Year</span>
+                </div>
+            </td>
+            <td><p>@item.Description</p></td>
+            <td>
+                <a href="@Url.Action("RemoveFromFavoritesAccount", "Favorite", new { movieId = @item.MovieId })" class="btn btn-primary dark-button" id="addToFavoriteButton">
+                    <img src="../../Images/Favorite.png" alt="Like"/>
+                    <label>Remove from favorites</label>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
+<!-- MY REVIEWS -->
+<h3>My reviews</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Movie</th>
+        <th>Info</th>
+        <th>Stars</th>
+        <th>Comment</th>
+        <th>Likes</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Ratings)
+    {
+        <tr>
+            <!-- Movie -->
+            <td>
+                <img src="@item.Picture" alt="@item.Title" class="img-thumbnail" style="max-height: 8em;"/>
+            </td>
+            <!-- Info -->
+            <td>
+                <div>
+                    <h5>@item.Title</h5>
+                    <span class="badge badge-secondary">@item.Year</span>
+                </div>
+            </td>
+            <!-- Stars -->
+            <td>
+                <div class="rating" style="width: 12em">
+                    @for (int i = 0; i < @item.Rating; i++)
+                    {
+                        <span class="star yellow"></span>
+                    }
+                    @if (@item.Rating % 1 != 0)
+                    {
+                        <span class="star yellow half"></span>
+                    }
+                    @for (int i = @item.Rating + 1; i <= 5; i++)
+                    {
+                        <span class="star"></span>
+                    }
+                </div>
+            </td>
+
+            <!-- Comment -->
+            <td>
+                <p>@item.Comment</p>
+            </td>
+            
+            <!-- Likes -->
+            <td>
+                <div>
+                    <img src="../../Images/Like.png" alt="Like" />
+                    <span id="likeCount">(@item.Likes)</span>
+                </div>
+                <div>
+
+                    <img src="../../Images/Dislike.png" alt="Like" />
+                    <span id="dislikeCount">(@item.DisLikes)</span>
+                </div>
+            </td>
+            
+        </tr>
+    }
+    </tbody>
+</table>

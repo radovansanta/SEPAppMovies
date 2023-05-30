@@ -44,6 +44,20 @@ namespace AppMovies.Controllers
             // Return a JSON response indicating the success or any other relevant data
             return RedirectToAction("Details","Home", new { id = movieId });
         }
+        
+        public async Task<ActionResult> RemoveFromFavoritesAccount(int movieId)
+        {
+            // Retrieve data from cache
+            string cachedData = HttpRuntime.Cache.Get("UserId") as string;
+            if (cachedData != null && cachedData!="0")
+            {
+                int currentUserId = int.Parse(cachedData);
+                await _favoriteRepository.DeleteFavoriteAsync(currentUserId,movieId);
+            }
+
+            // Return a JSON response indicating the success or any other relevant data
+            return RedirectToAction("Details","User");
+        }
 
     }
 }

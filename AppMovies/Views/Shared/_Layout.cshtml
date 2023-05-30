@@ -26,6 +26,15 @@
                 <li>@Html.ActionLink("Movies", "Index", "Home")</li>
                 <li>@Html.ActionLink("Directors", "Directors", "Directors")</li>
                 <li>@Html.ActionLink("Actors", "Actors", "Actors")</li>
+                
+                @{
+                    var currentUserId = HttpRuntime.Cache.Get("UserId") as string;
+                }
+                
+                @if (!string.IsNullOrEmpty(currentUserId))
+                            {
+                                <li>@Html.ActionLink("My Profile", "Details", "User")</li>
+                            }
             </ul>
             
             @{
