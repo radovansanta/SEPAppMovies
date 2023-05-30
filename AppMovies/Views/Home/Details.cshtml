@@ -24,17 +24,17 @@
                         {
                             if (ViewBag.IsFavorite==1)
                             {
-                                <button class="btn btn-primary dark-button" id="likeButton" onclick="handleLike()">
+                                <a href="@Url.Action("RemoveFromFavorites", "Favorite", new { movieId = @Model.Movie.MovieId })" class="btn btn-primary dark-button" id="addToFavoriteButton">
                                     <img src="../../Images/Favorite.png" alt="Like"/>
                                     <label>Remove from favorites</label>
-                                </button>
+                                </a>
                             }
                             else
                             {
-                                <button class="btn btn-primary dark-button" id="likeButton" onclick="handleLike()">
-                                    <img src="../../Images/NotFavorite.png" alt="Like"/>
-                                    <label>Add to favorites</label>
-                                </button>
+                                <a href="@Url.Action("AddToFavorites", "Favorite", new { movieId = @Model.Movie.MovieId })" class="btn btn-primary dark-button" id="addToFavoriteButton">
+                                  <img src="../../Images/NotFavorite.png" alt="Like"/>
+                                  <label>Add to favorites</label>
+                                </a>
                             }
                         }
             </div>

@@ -42,5 +42,41 @@ namespace AppMovies.Repositories
 
             return 0;
         }
+
+        public async Task InsertFavoriteAsync(int userId, int movieId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                var query = "INSERT INTO [MoviesApp].[Favorites] (UserID, MovieID) VALUES (@userId, @movieId);";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", userId);
+                    command.Parameters.AddWithValue("@movieId", movieId);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        public async Task DeleteFavoriteAsync(int userId, int movieId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                var query = "DELETE FROM [MoviesApp].[Favorites] WHERE UserID = @userId AND MovieID = @movieId;";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", userId);
+                    command.Parameters.AddWithValue("@movieId", movieId);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
     }
 }

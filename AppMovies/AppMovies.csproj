@@ -127,6 +127,7 @@
         <Compile Include="Controllers\ActorsController.cs" />
         <Compile Include="Controllers\AuthenticationController.cs" />
         <Compile Include="Controllers\DirectorsController.cs" />
+        <Compile Include="Controllers\FavoriteController.cs" />
         <Compile Include="Controllers\HomeController.cs" />
         <Compile Include="Controllers\ReviewController.cs" />
         <Compile Include="Functions\Base64ToImageConverter.cs" />
