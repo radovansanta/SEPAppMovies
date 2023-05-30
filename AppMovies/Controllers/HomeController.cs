@@ -18,12 +18,14 @@ namespace AppMovies.Controllers
         private readonly IMovieRepository _movieRepository;
         private readonly IUserRepository _userRepository;
         private readonly IFavoriteRepository _favoriteRepository;
+        private readonly IVotesRepository _votesRepository;
         public HomeController()
         {
             string connectionString = "Server=tcp:sepproject.database.windows.net,1433;Initial Catalog=SepProject;Persist Security Info=False;User ID=rasapebl;Password=BCb7wcOH;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             _movieRepository = new MovieRepository(connectionString);
             _userRepository = new UserRepository(connectionString);
             _favoriteRepository = new FavoriteRepository(connectionString);
+            _votesRepository = new VotesRepository(connectionString);
         }
         
         public async Task<ViewResult> Index(string searchTerm)
@@ -64,6 +66,7 @@ namespace AppMovies.Controllers
         {
             // Retrieve the director from the database based on the provided ID
             Movie movie = await _movieRepository.GetMovieByIdAsync(id);
+            MovieWithDetails movieWithDetails = null; 
 
             if (movie == null)
             {
@@ -81,25 +84,45 @@ namespace AppMovies.Controllers
                     //Add functionality to FavoriteMovie by User ID (true/false) and pass it to ViewBag
                     ViewBag.IsFavorite = await _favoriteRepository.GetIsFavoriteByUserIdAndMovieAsync(currentUser.UserId, id);
                     ViewBag.CurrentUser = currentUser;
+                    
+                    // Retrieve the extra items related to the director
+                    List<Director> directorsForMovie = await _movieRepository.GetDirectorsByMovieIdAsync(id);
+                    List<Actor> actorsForMovie = await _movieRepository.GetActorsByMovieIdAsync(id);
+                    List<Rating> ratingsForMovie = await _movieRepository.GetRatingsByMovieIdAsync(id);
+                    List<Vote> votesForMovieByUser = await _votesRepository.GetVotesByMovieIdAndUserIdAsync(currentUser.UserId,id);
+
+                    // Create a view model to hold both the director and extra items data
+                    movieWithDetails = new MovieWithDetails
+                    {
+                        Movie = movie,
+                        Directors = directorsForMovie,
+                        Actors = actorsForMovie,
+                        Ratings = ratingsForMovie,
+                        Votes = votesForMovieByUser
+                    };
+
+                    return View(movieWithDetails);
                 }
                 else
                 {
-                    // Handle the case when the user is not found in the repository
+
                 }
             }
 
+
             // Retrieve the extra items related to the director
-            List<Director> directorsForMovie = await _movieRepository.GetDirectorsByMovieIdAsync(id);
-            List<Actor> actorsForMovie = await _movieRepository.GetActorsByMovieIdAsync(id);
-            List<Rating> ratingsForMovie = await _movieRepository.GetRatingsByMovieIdAsync(id);
+            List<Director> directorsForMovieLogOut = await _movieRepository.GetDirectorsByMovieIdAsync(id);
+            List<Actor> actorsForMovieLogOut = await _movieRepository.GetActorsByMovieIdAsync(id);
+            List<Rating> ratingsForMovieLogOut = await _movieRepository.GetRatingsByMovieIdAsync(id);
 
             // Create a view model to hold both the director and extra items data
-            MovieWithDetails movieWithDetails = new MovieWithDetails
+            movieWithDetails = new MovieWithDetails
             {
                 Movie = movie,
-                Directors = directorsForMovie,
-                Actors = actorsForMovie,
-                Ratings = ratingsForMovie
+                Directors = directorsForMovieLogOut,
+                Actors = actorsForMovieLogOut,
+                Ratings = ratingsForMovieLogOut,
+                Votes = null
             };
 
             return View(movieWithDetails);

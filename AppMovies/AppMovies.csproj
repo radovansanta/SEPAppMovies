@@ -131,6 +131,7 @@
         <Compile Include="Controllers\HomeController.cs" />
         <Compile Include="Controllers\ReviewController.cs" />
         <Compile Include="Controllers\UserController.cs" />
+        <Compile Include="Controllers\VotesController.cs" />
         <Compile Include="Functions\Base64ToImageConverter.cs" />
         <Compile Include="Global.asax.cs">
             <DependentUpon>Global.asax</DependentUpon>
@@ -147,6 +148,7 @@
         <Compile Include="Models\RatingWithMovie.cs" />
         <Compile Include="Models\User.cs" />
         <Compile Include="Models\UserWithDetails.cs" />
+        <Compile Include="Models\Vote.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Repositories\ActorRepository.cs" />
         <Compile Include="Repositories\DirectorRepository.cs" />
@@ -157,9 +159,11 @@
         <Compile Include="Repositories\Interfaces\IMovieRepository.cs" />
         <Compile Include="Repositories\Interfaces\IRatingRepository.cs" />
         <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
+        <Compile Include="Repositories\Interfaces\IVotesRepository.cs" />
         <Compile Include="Repositories\MovieRepository.cs" />
         <Compile Include="Repositories\RatingRepository.cs" />
         <Compile Include="Repositories\UserRepository.cs" />
+        <Compile Include="Repositories\VotesRepository.cs" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="Content\bootstrap-theme.css" />
@@ -171,9 +175,11 @@
         <Content Include="Global.asax" />
         <Content Include="Content\Site.css" />
         <Content Include="Images\Dislike.png" />
+        <Content Include="Images\DisLikeSelected.png" />
         <Content Include="Images\Favorite.png" />
         <Content Include="Images\HalfStar.png" />
         <Content Include="Images\Like.png" />
+        <Content Include="Images\LikeSelected.png" />
         <Content Include="Images\Logo.png" />
         <Content Include="Images\NotFavorite.png" />
         <Content Include="Images\Star.png" />

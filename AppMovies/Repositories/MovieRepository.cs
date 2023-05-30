@@ -186,7 +186,7 @@ namespace AppMovies.Repositories
             {
                 await connection.OpenAsync();
 
-                var query = "SELECT MovieID, UserID, Rating, Comment, DateTimeStamp, Likes, DisLikes, FullName, Photo FROM [MoviesApp].[RatingsView] WHERE MovieID = @movieId";
+                var query = "SELECT MovieID, UserID, Rating, Comment, DateTimeStamp, Likes, DisLikes, FullName, Photo, RatingID FROM [MoviesApp].[RatingsView] WHERE MovieID = @movieId";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@movieId", movieId);
@@ -208,7 +208,8 @@ namespace AppMovies.Repositories
                                 Likes = reader.GetInt32(5),
                                 DisLikes = reader.GetInt32(6),
                                 FullName = reader.GetString(7),
-                                Photo = imageUrl
+                                Photo = imageUrl,
+                                RatingId = reader.GetInt32(9)
                             };
 
                             ratings.Add(item);

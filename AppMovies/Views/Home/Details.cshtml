@@ -149,20 +149,96 @@
             <td>
                 <div>
                     <h5>@item.FullName</h5>
-                    <div>
-                        <button class="btn btn-primary dark-button" id="likeButton" onclick="handleLike()">
-                            <img src="../../Images/Like.png" alt="Like" />
-                          </button>
-                        <span id="likeCount">(@item.Likes)</span>
-                    </div>
                     
-                    <div>
-                        <button class="btn btn-primary dark-button" id="likeButton" onclick="handleLike()">
-                            <img src="../../Images/Dislike.png" alt="Like" />
-                          </button>
-                        <span id="dislikeCount">(@item.DisLikes)</span>
+                    
+                    @{
+                        var currentLoggedUserId = HttpRuntime.Cache.Get("UserId") as string;
+                    }
+
+                    @if (!string.IsNullOrEmpty(currentLoggedUserId))
+                    {
+                        {
+                            var hasVote = Model.Votes.Any(v => v.RatingId == item.RatingId);
+                            if (hasVote)
+                            {
+                                var currentVote = Model.Votes.FirstOrDefault(v => v.RatingId == item.RatingId);
+                                var voteValue = currentVote.VoteValue;
+
+                                if (voteValue == 1)
+                                {
+                                    //HAS LIKE
+                                    <div>
+                                        <a class="btn btn-primary dark-button" id="likeButton" href="@Url.Action("RemoveLike", "Votes", new { ratingId = @item.RatingId, movieId = @item.MovieId })">
+                                            <img src="../../Images/LikeSelected.png" alt="Like"/>
+                                        </a>
+                                        <span id="likeCount">(@item.Likes)</span>
+                                    </div>
+
+                                    <div>
+                                        <a class="btn btn-primary dark-button" id="disLikeButton" href="@Url.Action("LikeDisLikeRating", "Votes", new { ratingId = @item.RatingId, ratingValue = -1, movieId = @item.MovieId })">
+                                            <img src="../../Images/DisLike.png" alt="Like"/>
+                                        </a>
+                                        <span id="dislikeCount">(@item.DisLikes)</span>
+                                    </div>
+                                }
+
+                                if (voteValue == -1)
+                                {
+                                    //HAS DISLIKE
+                                    <div>
+                                        <a class="btn btn-primary dark-button" id="likeButton" href="@Url.Action("LikeDisLikeRating", "Votes", new { ratingId = @item.RatingId, ratingValue = 1, movieId = @item.MovieId })">
+                                            <img src="../../Images/Like.png" alt="Like"/>
+                                        </a>
+                                        <span id="likeCount">(@item.Likes)</span>
+                                    </div>
+
+                                    <div>
+                                        <a class="btn btn-primary dark-button" id="disLikeButton" href="@Url.Action("RemoveLike", "Votes", new { ratingId = @item.RatingId, movieId = @item.MovieId })">
+                                            <img src="../../Images/DisLikeSelected.png" alt="Like"/>
+                                        </a>
+                                        <span id="dislikeCount">(@item.DisLikes)</span>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                //HAS NOT BEEN VOTED YET
+                                <div>
+                                    <a class="btn btn-primary dark-button" id="likeButton" href="@Url.Action("LikeDisLikeRating", "Votes", new { ratingId = @item.RatingId, ratingValue = 1, movieId = @item.MovieId })">
+                                        <img src="../../Images/Like.png" alt="Like" />
+                                    </a>
+                                    <span id="likeCount">(@item.Likes)</span>
+                                </div>
+
+                                <div>
+                                    <a class="btn btn-primary dark-button" id="disLikeButton" href="@Url.Action("LikeDisLikeRating", "Votes", new { ratingId = @item.RatingId, ratingValue = -1, movieId = @item.MovieId })">
+                                        <img src="../../Images/DisLike.png" alt="Like" />
+                                    </a>
+                                    <span id="dislikeCount">(@item.DisLikes)</span>
+                                </div>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //LOGGED OUT
+                        <div>
+                            <img src="../../Images/Like.png" alt="Like" />
+                            <span id="likeCount">(@item.Likes)</span>
+                        </div>
+
+                        <div>
+                            <img src="../../Images/DisLike.png" alt="Like" />
+                            <span id="dislikeCount">(@item.DisLikes)</span>
+                        </div>
+                        
+                    }
+
+
+
+
+
                     </div>
-                </div>
             </td>
             <td>
                 <div class="rating" style="width: 12em">
