@@ -51,10 +51,6 @@ namespace AppMovies.Controllers
                 {
                     ViewBag.CurrentUser = currentUser;
                 }
-                else
-                {
-                    // Handle the case when the user is not found in the repository
-                }
             }
 
             // Pass the search term and filtered results to the view

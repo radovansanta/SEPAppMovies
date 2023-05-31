@@ -234,10 +234,6 @@
                         
                     }
 
-
-
-
-
                     </div>
             </td>
             <td>
@@ -291,53 +287,30 @@
                 <button type="button" class="btn btn-primary dark-button" onclick="selectNumber(5)">5</button>
             </div>
 
-            <form action="@Url.Action("PostReview", "Review")" method="post" onsubmit="return validateForm()">
-                <div id="selectedNumberContainer">
-                    <h4><span id="selectedNumber"></span> out of 5 stars</h4>
-                    <input type="hidden" id="selectedNumberInput" name="selectedNumber" value="" />
-                    <input type="hidden" id="selectedMovie" name="selectedMovie" value="@Model.Movie.MovieId" />
-                </div>
+<form action="@Url.Action("PostReview", "Review")" method="post">
+    <div id="selectedNumberContainer">
+        <h4><span id="selectedNumber"></span> out of 5 stars</h4>
+        <input type="hidden" id="selectedNumberInput" name="selectedNumber" value="" />
+        <input type="hidden" id="selectedMovie" name="selectedMovie" value="@Model.Movie.MovieId" />
+    </div>
 
-                <div class="form-group">
-                    <textarea placeholder="Write your review" class="form-control" id="reviewText" name="reviewText" rows="5" style="width: 100%; max-width: 2280px; background-color: #363636; color: white"></textarea> <!-- Add inline style -->
-                </div>
-                
-                <script>
-                    var selectedNumber;
+    <div class="form-group">
+        <textarea placeholder="Write your review" class="form-control" id="reviewText" name="reviewText" rows="5" style="width: 100%; max-width: 2280px; background-color: #363636; color: white"></textarea>
+    </div>
 
-                      function selectNumber(number) {
-                        selectedNumber = number;
-                        document.getElementById("selectedNumber").value = selectedNumber;
-                        document.getElementById("selectedNumberInput").value = selectedNumber;
-                      }
-                      
-                      function validateForm() {
-                          var selectedNumber = document.getElementById("selectedNumber").value;
-                          var reviewText = document.getElementById("reviewText").value;
-                          
-                          if (selectedNumber === "") {
-                              alert("Please select a number of stars from 1 to 5");
-                              return false;
-                          }
-                          
-                          if (reviewText === "") {
-                              alert("Please write a review");               
-                              return false;                        
-                          }
-                        
-                          return true;
-                      }
-          
-                </script>
-        
-            
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary dark-button" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary dark-button">Post review</button>
+    </div>
+</form>
 
-      
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary dark-button" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary dark-button">Post review</button>
-                </div>
-            </form>
+<script>
+    function selectNumber(number) {
+        document.getElementById("selectedNumber").textContent = number;
+        document.getElementById("selectedNumberInput").value = number;
+    }
+
+</script>
         </div>
     </div>
   </div>

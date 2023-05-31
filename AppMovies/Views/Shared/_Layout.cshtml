@@ -98,26 +98,26 @@
       </div>
         <div class="modal-body">
             <!-- Content for the modal -->
-<form action="@Url.Action("SignUp", "Authentication")" method="post" enctype="multipart/form-data">
+<form action="@Url.Action("SignUp", "Authentication")" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
     <div class="form-group">
         <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name">
+        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your first name" required>
     </div>
     <div class="form-group">
         <label for="lastName">Last Name</label>
-        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name">
+        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter your last name" required>
     </div>
     <div class="form-group">
         <label for="email">Email address</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
     </div>
     <div class="form-group">
         <label for="profilePhoto">Profile Photo</label>
-        <input type="file" class="form-control-file" id="profilePhoto" name="profilePhoto">
+        <input type="file" class="form-control-file" id="profilePhoto" name="profilePhoto" required>
     </div>
 
     <div class="modal-footer">
@@ -125,6 +125,22 @@
         <button type="submit" class="btn btn-primary dark-button">Sign Up</button>
     </div>
 </form>
+
+<script>
+    function validateForm() {
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var profilePhoto = document.getElementById('profilePhoto').value;
+
+        if (firstName === "" || lastName === "" || email === "" || password === "" || profilePhoto === "") {
+            alert("Please fill in all fields.");
+            return false;
+        }
+        return true;
+    }
+</script>
         </div>
     </div>
   </div>
