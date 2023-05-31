@@ -1,7 +1,7 @@
 @model AppMovies.Models.ActorWithMovies
 
 @{
-    ViewBag.Title = "Actor details";
+    ViewBag.Title = @Model.Actor.FirstName+" "+@Model.Actor.LastName;
 }
 
 <div class="row">

@@ -1,7 +1,7 @@
 @model AppMovies.Models.UserWithDetails
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = @Model.User.FirstName+" "+@Model.User.LastName;
 }
 
 <!-- USER INFORMATION -->
